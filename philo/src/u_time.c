@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_philo.h                                      :+:      :+:    :+:   */
+/*   u_time.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 09:25:12 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/06/26 11:24:40 by cnatanae         ###   ########.fr       */
+/*   Created: 2024/06/26 09:35:17 by cnatanae          #+#    #+#             */
+/*   Updated: 2024/06/26 11:24:47 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_PHILO_H
-# define UTILS_PHILO_H
+# include "utils_philo.h"
 
-# include "philo.h"
+long	get_time(void)
+{
+	struct timeval	time;
 
-long	get_time(void);
-long	u_usleep(long time);
-void	u_exit(t_data *data);
-int		u_error(char *str, t_data *data);
-bool	is_in_strings(char c, char *str);
-long	u_atol(const char *str);
+	if (gettimeofday(&time, NULL))
+		return (u_error("gettimeofday() failed\n", NULL));
+	return ((long)(time.tv_sec * 1000 + time.tv_usec / 1000));
+}
 
-# endif
+long	u_usleep(long time)
+{
+	long	start;
+
+	start = get_time();
+	while (get_time() < start + time)
+		usleep(100);
+	return (0);
+}

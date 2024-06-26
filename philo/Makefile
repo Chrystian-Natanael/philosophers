@@ -43,6 +43,10 @@ BUILD_DIR := ./build/
 #! ******************************************************************************#
 
 SRCS =	$(addprefix $(SRCS_PATH),\
+		u_error.c \
+		u_exit.c \
+		u_time.c \
+		u_atol.c \
 		philo.c)
 OBJS = $(SRCS:%.c=$(BUILD_DIR)%.o)
 DEPS = $(OBJS:.o=.d)

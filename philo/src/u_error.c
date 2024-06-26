@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_philo.h                                      :+:      :+:    :+:   */
+/*   u_error.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 09:25:12 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/06/26 11:24:40 by cnatanae         ###   ########.fr       */
+/*   Created: 2024/06/26 09:32:04 by cnatanae          #+#    #+#             */
+/*   Updated: 2024/06/26 09:40:09 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_PHILO_H
-# define UTILS_PHILO_H
+# include "utils_philo.h"
 
-# include "philo.h"
-
-long	get_time(void);
-long	u_usleep(long time);
-void	u_exit(t_data *data);
-int		u_error(char *str, t_data *data);
-bool	is_in_strings(char c, char *str);
-long	u_atol(const char *str);
-
-# endif
+int	u_error(char *str, t_data *data)
+{
+	printf("Philosophers: Error: %s\n", str);
+	if (data)
+		u_exit(data);
+	return (1);
+}
