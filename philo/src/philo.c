@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:02 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/06/26 11:39:02 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:28:00 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,14 @@ void	validate_args(int argc)
 	}
 }
 
-int	init_data(t_data *data, int argc, char **argv)
-{
-	data->num_of_philo = u_atol(argv[1]);
-	data->death_time = u_atol(argv[2]);
-	data->eat_time = u_atol(argv[3]);
-	data->sleep_time = u_atol(argv[4]);
-	data->start_time = get_time();
-	data->dead = 0;
-	data->finish = 0;
-	if (argc == 6)
-		data->num_of_eat = u_atol(argv[5]);
-	else
-		data->num_of_eat = -1;
-	if (data->num_of_philo <= 0 || data->num_of_philo > 200 || data->death_time < 0 || data->eat_time < 0
-		|| data->sleep_time < 0 || (argc == 6 && data->num_of_eat < 1))
-		return (u_error("Invalid arguments", NULL));
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	validate_args(argc);
+
 	if (init_data(&data, argc, argv))
 		return (1);
-	printf("[philo] num_of_philo: [%d]\n", data.num_of_philo);
-	printf("[philo] death_time: [%ld]\n", data.death_time);
-		printf("[philo] eat_time: [%ld]\n", data.eat_time);
-	printf("[philo] sleep_time: [%ld]\n", data.sleep_time);
-	if (argc == 6)
-		printf("[philo] num_of_eat: [%ld]\n", data.num_of_eat);
-	printf("[philo] start_time: [%ld]\n", data.start_time);
+	init_philo(&data); //! TODO
+	// start_dinner(&data); //! TODO
+	// end_dinner(&data); //! TODO
 	return (0);
 }

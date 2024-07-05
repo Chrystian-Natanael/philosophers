@@ -6,14 +6,14 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:33:46 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/06/26 09:34:49 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:54:47 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "utils_philo.h"
+#include "utils_philo.h"
 
 void	u_exit(t_data *data)
 {
 	free(data);
-	exit(1);
+	quit(1);
 }

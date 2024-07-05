@@ -6,11 +6,11 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:35:17 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/06/26 11:24:47 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/01 09:12:16 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "utils_philo.h"
+#include "utils_philo.h"
 
 long	get_time(void)
 {

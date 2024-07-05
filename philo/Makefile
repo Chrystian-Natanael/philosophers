@@ -35,8 +35,9 @@ RESET = \033[0m
 #! ******************************************************************************#
 
 SRCS_PATH = ./src/
-INCS_PATH = ./includes/
+INCS_PATH = ./includes/ ./garbage-collector/include/
 BUILD_DIR := ./build/
+GARB_DIR := garbage-collector/
 
 #! ******************************************************************************#
 #                                   FILES                                        #
@@ -47,7 +48,10 @@ SRCS =	$(addprefix $(SRCS_PATH),\
 		u_exit.c \
 		u_time.c \
 		u_atol.c \
+		init.c \
 		philo.c)
+GARB = $(addprefix $(GARB_DIR), garbage_collector.a)
+LIBS = $(GARB_DIR)garbage_collector.a
 OBJS = $(SRCS:%.c=$(BUILD_DIR)%.o)
 DEPS = $(OBJS:.o=.d)
 
@@ -67,10 +71,11 @@ SHELL := /bin/bash
 
 CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+LDFLAGS = $(GARB_DIR)garbage_collector.a
 LDLIBS = -ldl -lglfw -pthread
 CPPFLAGS = $(addprefix -I,$(INCS_PATH)) -MMD -MP
 COMP_OBJ = $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-COMP_EXE = $(CC) $(OBJS) $(LDLIBS) -o $(NAME)
+COMP_EXE = $(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 #! ******************************************************************************#
 #                                  FUNCTIONS                                     #
@@ -78,6 +83,11 @@ COMP_EXE = $(CC) $(OBJS) $(LDLIBS) -o $(NAME)
 
 define create_dir
 	$(MKDIR) $(dir $@)
+endef
+
+define comp_garb
+	printf "$(YELLOW)Building garb files\n$(RESET)"
+	$(MAKE) -C $(GARB_DIR)
 endef
 
 define comp_objs
@@ -105,7 +115,7 @@ endef
 #                                   TARGETS                                      #
 #! ******************************************************************************#
 
-all: $(NAME)
+all: $(GARB) $(NAME)
 
 $(BUILD_DIR)%.o: %.c
 	$(call create_dir)
@@ -114,11 +124,16 @@ $(BUILD_DIR)%.o: %.c
 $(NAME): $(OBJS)
 	$(call comp_exe)
 
+$(GARB):
+	$(call comp_garb)
+
 clean:
 	$(RM) $(BUILD_DIR)
+	$(MAKE) -C $(GARB_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) -C $(GARB_DIR) fclean
 
 re: fclean all
 
