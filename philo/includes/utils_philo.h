@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:25:12 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/01 09:13:34 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:27:53 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "philo.h"
 
-int		u_error(char *str, t_data *data);
-void	u_exit(t_data *data);
+int		u_error(char *str, int is_exit);
 long	get_time(void);
 long	u_usleep(long time);
 long	u_atol(const char *str);

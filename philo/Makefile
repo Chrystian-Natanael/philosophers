@@ -45,10 +45,12 @@ GARB_DIR := garbage-collector/
 
 SRCS =	$(addprefix $(SRCS_PATH),\
 		u_error.c \
-		u_exit.c \
 		u_time.c \
 		u_atol.c \
 		init.c \
+		handle_mutex.c \
+		handle_threads.c \
+		dinner.c \
 		philo.c)
 GARB = $(addprefix $(GARB_DIR), garbage_collector.a)
 LIBS = $(GARB_DIR)garbage_collector.a

@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:02 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/05 16:28:00 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:36:08 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	main(int argc, char **argv)
 
 	if (init_data(&data, argc, argv))
 		return (1);
-	init_philo(&data); //! TODO
-	// start_dinner(&data); //! TODO
-	// end_dinner(&data); //! TODO
+	init_philo(&data);
+	start_dinner(&data); //TODO
+	// end_dinner(&data); //TODO
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:35:17 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/01 09:12:16 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:28:21 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long	get_time(void)
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL))
-		return (u_error("gettimeofday() failed\n", NULL));
+		return (u_error("gettimeofday() failed\n", 0));
 	return ((long)(time.tv_sec * 1000 + time.tv_usec / 1000));
 }
 

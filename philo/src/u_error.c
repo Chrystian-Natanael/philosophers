@@ -6,16 +6,16 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:32:04 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/05 15:19:25 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:27:34 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils_philo.h"
 
-int	u_error(char *str, t_data *data)
+int	u_error(char *str, int is_exit)
 {
 	printf(RED"Philosophers: Error: %s\n"RST, str);
-	if (data)
-		u_exit(data);
+	if (is_exit)
+		quit(1);
 	return (1);
 }
