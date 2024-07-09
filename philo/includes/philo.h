@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/09 17:52:28 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:14:35 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,16 @@ typedef enum e_mutex_action
 	DETACH
 }				t_mutex_action;
 
+typedef enum e_philo_action
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_A_FIRST_FORK,
+	TAKE_A_SECOND_FORK,
+	DIED
+}			t_philo_action;
+
 typedef struct s_fork
 {
 	int				fork_id;
@@ -84,6 +94,7 @@ struct s_data
 {
 	int				num_of_philo;
 	bool			end_simulation;
+	bool			all_threads_is_ready;
 	long			death_time;
 	long			eat_time;
 	long			sleep_time;
@@ -91,8 +102,9 @@ struct s_data
 	long			start_time;
 	t_fork			*forks;
 	t_philo			*philos;
-	t_mtx	mutex_table;
-}
+	t_mtx			mutex_table;
+	t_mtx			mutex_write;
+};
 
 // Validation
 void	validate_args(int argc);
@@ -113,4 +125,13 @@ void	safe_handle_thread(pthread_t *thread, void *(*func)(void *),\
 // Dinner
 void	start_dinner(t_data *data);
 
+// getters && setters
+bool	get_bool(t_mtx *mutex, bool *src);
+bool	simulation_finished(t_data *data);
+void	set_bool(t_mtx *mutex, bool value, bool *dest);
+void	set_long(t_mtx *mutex, long value, long *dest);
+long	get_long(t_mtx *mutex, long *src);
+
+// Synchro
+void	wait_all_threads(t_data *data);
 #endif

@@ -51,6 +51,7 @@ SRCS =	$(addprefix $(SRCS_PATH),\
 		handle_mutex.c \
 		handle_threads.c \
 		dinner.c \
+		synchro.c \
 		philo.c)
 GARB = $(addprefix $(GARB_DIR), garbage_collector.a)
 LIBS = $(GARB_DIR)garbage_collector.a
