@@ -47,11 +47,15 @@ SRCS =	$(addprefix $(SRCS_PATH),\
 		u_error.c \
 		u_time.c \
 		u_atol.c \
+		utils.c \
 		init.c \
 		handle_mutex.c \
 		handle_threads.c \
 		dinner.c \
+		routines.c \
+		getters_setters.c \
 		synchro.c \
+		monitor.c \
 		philo.c)
 GARB = $(addprefix $(GARB_DIR), garbage_collector.a)
 LIBS = $(GARB_DIR)garbage_collector.a
@@ -72,7 +76,7 @@ SHELL := /bin/bash
 #                                 FLAGS E COMP                                   #
 #! ******************************************************************************#
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 DFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 LDFLAGS = $(GARB_DIR)garbage_collector.a
 LDLIBS = -ldl -lglfw -pthread

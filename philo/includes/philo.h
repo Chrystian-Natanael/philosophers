@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/09 20:14:35 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:40:21 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ typedef pthread_mutex_t t_mtx;
 
 typedef enum e_mutex_action
 {
-	INIT,
-	DESTROY,
 	LOCK,
 	UNLOCK,
+	INIT,
+	DESTROY,
 	CREATE,
 	JOIN,
 	DETACH
@@ -83,11 +83,12 @@ typedef struct s_philo
 	int			id;
 	bool		full;
 	long		meal_count;
-	long		last_meal_time;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
+	long		last_meal;
+	t_mtx		mutex_philo;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
+	t_data		*data;
 	pthread_t	thread_id;
-	t_data *data;
 }				t_philo;
 
 struct s_data
@@ -100,10 +101,12 @@ struct s_data
 	long			sleep_time;
 	long			limit_meal;
 	long			start_time;
+	long			num_of_threads_running;
 	t_fork			*forks;
 	t_philo			*philos;
 	t_mtx			mutex_table;
 	t_mtx			mutex_write;
+	pthread_t		monitor;
 };
 
 // Validation
@@ -112,6 +115,8 @@ void	validate_args(int argc);
 // Inits
 int		init_data(t_data *data, int argc, char **argv);
 void	init_philo(t_data *data);
+void	set_philos(t_data *data);
+void	assign_forks(int philo_pos, t_fork *forks, t_philo *philo);
 
 // Mutex
 void	safe_handle_mutex(t_mtx *fork, t_mutex_action action);
@@ -131,7 +136,17 @@ bool	simulation_finished(t_data *data);
 void	set_bool(t_mtx *mutex, bool value, bool *dest);
 void	set_long(t_mtx *mutex, long value, long *dest);
 long	get_long(t_mtx *mutex, long *src);
+void	increase_long(t_mtx *mutex, long *var);
 
 // Synchro
 void	wait_all_threads(t_data *data);
+
+// Routines
+void	eat(t_philo *philo);
+void	thinking(t_philo *philo);
+
+// Monitor
+bool	all_threads_is_running(t_mtx *mutex, long *thread, long philo_nbr);
+void	*monitor_simulation(void *data);
+
 #endif
