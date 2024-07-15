@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/15 19:52:35 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/15 20:15:17 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ struct s_data
 };
 
 // Validation
-void	validate_args(int argc);
+void	validate_args(int argc, char **argv);
 
 // Inits
 int		init_data(t_data *data, int argc, char **argv);
