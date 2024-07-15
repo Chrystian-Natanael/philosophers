@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:35:17 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/13 18:59:51 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:45:58 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	u_precise_usleep(long usec, t_data *data)
 	long	rem;
 
 	start = get_time(MICROSECONDS);
-	while(get_time(MICROSECONDS) - start < usec)
+	while (get_time(MICROSECONDS) - start < usec)
 	{
 		if (simulation_finished(data))
 			break ;
@@ -45,7 +45,7 @@ void	u_precise_usleep(long usec, t_data *data)
 		if (rem > 1e3)
 			usleep(rem / 2);
 		else
-			while(get_time(MICROSECONDS) - start < usec)
+			while (get_time(MICROSECONDS) - start < usec)
 				;
 	}
 }

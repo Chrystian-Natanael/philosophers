@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/13 18:40:21 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:50:20 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@
 # define C	  "\033[1;36m"		/* Bold Cyan */
 # define W	  "\033[1;37m"		/* Bold White */
 
-typedef struct s_data t_data;
-typedef pthread_mutex_t t_mtx;
+typedef struct s_data	t_data;
+typedef pthread_mutex_t	t_mtx;
 
 typedef enum e_mutex_action
 {
@@ -74,9 +74,9 @@ typedef enum e_philo_action
 
 typedef struct s_fork
 {
-	int				fork_id;
+	int		fork_id;
 	t_mtx	mutex;
-}					t_fork;
+}			t_fork;
 
 typedef struct s_philo
 {
@@ -124,8 +124,8 @@ void	handle_mutex_error(int error, t_mutex_action action);
 
 // Threads
 void	handle_thread_error(int error, t_mutex_action action);
-void	safe_handle_thread(pthread_t *thread, void *(*func)(void *),\
-		t_philo *philo, t_mutex_action action);
+void	safe_handle_thread(pthread_t *thread, void *(*func)(void *), \
+		void *data, t_mutex_action action);
 
 // Dinner
 void	start_dinner(t_data *data);
@@ -140,10 +140,13 @@ void	increase_long(t_mtx *mutex, long *var);
 
 // Synchro
 void	wait_all_threads(t_data *data);
+void	unsync_philos(t_philo *philo);
 
 // Routines
 void	eat(t_philo *philo);
-void	thinking(t_philo *philo);
+void	thinking(t_philo *philo, bool pre_simulation);
+void	*lone_philo(void *data);
+void	end_dinner(t_data *data);
 
 // Monitor
 bool	all_threads_is_running(t_mtx *mutex, long *thread, long philo_nbr);

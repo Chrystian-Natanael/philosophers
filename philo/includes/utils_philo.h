@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:25:12 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/13 18:00:48 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/15 18:48:33 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ long	u_atol(const char *str);
 bool	is_in_strings(char c, char *str);
 // void	write_status(t_philo_action action, t_philo *philo);
 void	write_status(t_philo_action action, t_philo *philo, bool debub);
-
 
 #endif

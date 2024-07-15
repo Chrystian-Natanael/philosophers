@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:02 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/13 16:22:26 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/15 17:09:38 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ int	main(int argc, char **argv)
 	if (init_data(&data, argc, argv))
 		return (1);
 	init_philo(&data);
-	start_dinner(&data); //TODO
-	// end_dinner(&data); //TODO
-	return (0);
+	start_dinner(&data);
+	end_dinner(&data);
+	quit (0);
+}
+
+void	end_dinner(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->num_of_philo)
+		safe_handle_mutex(&data->forks[i].mutex, DESTROY);
+	safe_handle_mutex(&data->mutex_table, DESTROY);
+	safe_handle_mutex(&data->mutex_write, DESTROY);
 }
