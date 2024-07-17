@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/15 20:15:17 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/17 11:12:17 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,28 @@
 // For use errors mutex
 # include <errno.h>
 
-# define RST    "\001\033[0m\002"
-# define R      "\001\033[1;31m\002"
-# define G      "\001\033[1;32m\002"
-# define Y      "\001\033[1;33m\002"
-# define B      "\001\033[1;34m\002"
-# define M      "\001\033[1;35m\002"
-# define C      "\001\033[1;36m\002"
-# define W      "\001\033[1;37m\002"
-# define ORANGE "\001\033[38;5;208m\002"
-# define BLUE   "\001\033[38;5;27m\002"
-# define GREEN  "\001\033[38;5;46m\002"
-# define RED    "\001\033[38;5;196m\002"
-# define YELLOW "\001\033[38;5;226m\002"
-# define CYAN   "\001\033[38;5;51m\002"
-# define PURPLE "\001\033[38;5;129m\002"
-# define GREY   "\001\033[38;5;240m\002"
-# define WHITE  "\001\033[38;5;231m\002"
-# define BLACK  "\001\033[38;5;16m\002"
-# define BOLD   "\001\033[1m\002"
-# define UNDER  "\001\033[4m\002"
-# define BLINK  "\001\033[5m\002"
-# define REVERSE "\001\033[7m\002"
+# define RST		"\001\033[0m\002"
+# define R			"\001\033[1;31m\002"
+# define G			"\001\033[1;32m\002"
+# define Y			"\001\033[1;33m\002"
+# define B			"\001\033[1;34m\002"
+# define M			"\001\033[1;35m\002"
+# define C			"\001\033[1;36m\002"
+# define W			"\001\033[1;37m\002"
+# define ORANGE		"\001\033[38;5;208m\002"
+# define BLUE		"\001\033[38;5;27m\002"
+# define GREEN		"\001\033[38;5;46m\002"
+# define RED		"\001\033[38;5;196m\002"
+# define YELLOW		"\001\033[38;5;226m\002"
+# define CYAN		"\001\033[38;5;51m\002"
+# define PURPLE		"\001\033[38;5;129m\002"
+# define GREY		"\001\033[38;5;240m\002"
+# define WHITE		"\001\033[38;5;231m\002"
+# define BLACK		"\001\033[38;5;16m\002"
+# define BOLD		"\001\033[1m\002"
+# define UNDER		"\001\033[4m\002"
+# define BLINK		"\001\033[5m\002"
+# define REVERSE	"\001\033[7m\002"
 
 typedef struct s_data	t_data;
 typedef pthread_mutex_t	t_mtx;
@@ -72,8 +72,7 @@ typedef enum e_mutex_action
 	INIT,
 	DESTROY,
 	CREATE,
-	JOIN,
-	DETACH
+	JOIN
 }				t_mutex_action;
 
 typedef enum e_philo_action
