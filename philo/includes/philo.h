@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/15 18:50:20 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:32:58 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@
 
 # define RST	"\033[0m"		/* Reset to default color */
 # define RED	"\033[1;31m"	/* Bold Red */
-# define G	  "\033[1;32m"		/* Bold Green */
-# define Y	  "\033[1;33m"		/* Bold Yellow */
-# define B	  "\033[1;34m"		/* Bold Blue */
-# define M	  "\033[1;35m"		/* Bold Magenta */
-# define C	  "\033[1;36m"		/* Bold Cyan */
-# define W	  "\033[1;37m"		/* Bold White */
+# define G		"\033[1;32m"	/* Bold Green */
+# define Y		"\033[1;33m"	/* Bold Yellow */
+# define B		"\033[1;34m"	/* Bold Blue */
+# define M		"\033[1;35m"	/* Bold Magenta */
+# define C		"\033[1;36m"	/* Bold Cyan */
+# define W		"\033[1;37m"	/* Bold White */
 
 typedef struct s_data	t_data;
 typedef pthread_mutex_t	t_mtx;

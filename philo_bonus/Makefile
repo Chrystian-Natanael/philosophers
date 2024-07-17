@@ -2,7 +2,7 @@
 #                                   NAME                                         #
 #! ******************************************************************************#
 
-NAME = 
+NAME = philo_bonus
 .DEFAULT_GOAL := all
 .PHONY: all clean fclean re help
 .SILENT:
@@ -34,21 +34,27 @@ RESET = \033[0m
 #                                   PATH                                         #
 #! ******************************************************************************#
 
-SRCS_PATH = 
-INCS_PATH = 
-BUILD_DIR := 
-LIBFT_DIR := 
+SRCS_PATH = ./src/
+INCS_PATH = ./includes/ ./garbage-collector/include/
+BUILD_DIR := ./build/
+GARB_DIR := garbage-collector/
 
 #! ******************************************************************************#
 #                                   FILES                                        #
 #! ******************************************************************************#
-
 SRCS =	$(addprefix $(SRCS_PATH),\
-		file01 \
-		file02 \
-		file03)
-# LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
-LIBS := $(LIBFT_DIR)libft.a
+		u_atol.c \
+		u_error.c \
+		u_time.c \
+		init.c \
+		philos_life.c \
+		routines.c \
+		utils.c \
+		semaphores.c \
+		monitoring.c \
+		philo_bonus.c)
+GARB = $(addprefix $(GARB_DIR), garbage_collector.a)
+LIBS = $(GARB_DIR)garbage_collector.a
 OBJS = $(SRCS:%.c=$(BUILD_DIR)%.o)
 DEPS = $(OBJS:.o=.d)
 
@@ -66,13 +72,13 @@ SHELL := /bin/bash
 #                                 FLAGS E COMP                                   #
 #! ******************************************************************************#
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 DFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-LDLIBS = -lft -ldl -lglfw -pthread
-LDFLAGS = $(addprefix -L,$(dir $(LIBS)))
+LDFLAGS = $(GARB_DIR)garbage_collector.a
+LDLIBS = -ldl -lglfw -pthread
 CPPFLAGS = $(addprefix -I,$(INCS_PATH)) -MMD -MP
 COMP_OBJ = $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-COMP_EXE = $(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
+COMP_EXE = $(CC) $(OBJS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
 #! ******************************************************************************#
 #                                  FUNCTIONS                                     #
@@ -82,43 +88,37 @@ define create_dir
 	$(MKDIR) $(dir $@)
 endef
 
+define comp_garb
+	printf "$(YELLOW)Building garb files\n$(RESET)"
+	$(MAKE) -C $(GARB_DIR)
+endef
+
 define comp_objs
 	$(eval COUNT=$(shell expr $(COUNT) + 1))
 	$(COMP_OBJ)
 	$(SLEEP)
-	printf "GENERIC MESSAGE$(YELLOW) %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
-endef
-
-define comp_libft
-	printf "$(YELLOW)Building libft files\n$(RESET)"
-	$(MAKE) -C $(LIBFT_DIR)
+	printf "Compiling philo bonus files:$(DARK_YELLOW) %d%%\r$(RESET)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
 endef
 
 define comp_exe
 	$(COMP_EXE)
 	printf "\n"
-	printf "$(GREEN)PROGRAM ->$(RESET)$(PURPLE) READY\n$(RESET)"
+	printf "$(GREEN)PHILO_BONUS ->$(RESET)$(DARK_CYAN) IS READY\n$(RESET)"
 endef
 
 define help
-	echo "${DARK_RED}Available targets:${RESET}"
-	printf "\n"
-	echo "${DARK_BLUE}all:${RESET} ${LIGHT_GRAY}Build push swap${RESET}"
-	echo "${DARK_BLUE}both:${RESET} ${LIGHT_GRAY}Build push swap and checker${RESET}"
-	echo "${DARK_BLUE}bonus:${RESET} ${LIGHT_GRAY}Build checker${RESET}"
-	echo "${DARK_BLUE}re:${RESET} ${LIGHT_GRAY}Rebuild the program${RESET}"
-	echo "${DARK_BLUE}clean:${RESET} ${LIGHT_GRAY}Remove the object files${RESET}"
-	echo "${DARK_BLUE}fclean:${RESET} ${LIGHT_GRAY}Remove the program and the object files${RESET}"
-	echo "${DARK_BLUE}debug:${RESET} ${LIGHT_GRAY}Build the program with debugging information${RESET}"
-	echo "${DARK_BLUE}case:${RESET} ${LIGHT_GRAY}Show numbers with best and worst case${RESET}"
-	echo "${DARK_BLUE}test_nb:${RESET} ${LIGHT_GRAY}Test the program with provided list length${RESET}"
+	printf "$(DARK_RED)Available targets:${RESET}\n"
+	printf "${DARK_BLUE}all:${RESET}	${LIGHT_GRAY}Build philo program${RESET}\n"
+	printf "${DARK_BLUE}re:${RESET}	${LIGHT_GRAY}Rebuild the program${RESET}\n"
+	printf "${DARK_BLUE}clean:${RESET}	${LIGHT_GRAY}Remove the object files${RESET}\n"
+	printf "${DARK_BLUE}fclean:${RESET}	${LIGHT_GRAY}Remove the program and the object files${RESET}\n"
 endef
 
 #! ******************************************************************************#
 #                                   TARGETS                                      #
 #! ******************************************************************************#
 
-all: $(LIBFT) $(NAME)
+all: $(GARB) $(NAME)
 
 $(BUILD_DIR)%.o: %.c
 	$(call create_dir)
@@ -127,16 +127,16 @@ $(BUILD_DIR)%.o: %.c
 $(NAME): $(OBJS)
 	$(call comp_exe)
 
-$(LIBFT):
-	$(call comp_libft)
+$(GARB):
+	$(call comp_garb)
 
 clean:
 	$(RM) $(BUILD_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(GARB_DIR) clean
 
 fclean: clean
 	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(GARB_DIR) fclean
 
 re: fclean all
 
