@@ -6,15 +6,19 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:21:02 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/15 17:09:38 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/17 10:36:22 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include "utils_philo.h"
 
-void	validate_args(int argc)
+static void	philo_valid_input(const char *str_arg);
+
+void	validate_args(int argc, char **argv)
 {
+	int	i;
+
 	if (argc != 5 && argc != 6)
 	{
 		printf("Philosophers: Invalid number of arguments\n");
@@ -26,6 +30,19 @@ void	validate_args(int argc)
 		printf("\033[92m[4]\033[0m - Time to sleep\n");
 		printf("\033[92m[5]\033[0m - Num of times each philo must eat - Opt\n");
 		exit(1);
+	}
+	i = 0;
+	while (++i < argc)
+		philo_valid_input(argv[i]);
+}
+
+static void	philo_valid_input(const char *str_arg)
+{
+	while (*str_arg)
+	{
+		if (*str_arg < '0' || *str_arg > '9')
+			u_error("Invalid argument. Only positives numbers are allowed.", 1);
+		str_arg++;
 	}
 }
 

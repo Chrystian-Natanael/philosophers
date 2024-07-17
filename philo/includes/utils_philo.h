@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 09:25:12 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/07/15 18:48:33 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/07/17 10:35:01 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ long	get_time(t_time_code code);
 void	u_precise_usleep(long usec, t_data *data);
 long	u_atol(const char *str);
 bool	is_in_strings(char c, char *str);
-// void	write_status(t_philo_action action, t_philo *philo);
-void	write_status(t_philo_action action, t_philo *philo, bool debub);
+void	write_status(t_philo_action action, t_philo *philo);
 
 #endif
